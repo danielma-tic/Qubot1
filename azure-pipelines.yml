@@ -37,3 +37,9 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+    - task: AzureWebAppContainer@1
+      displayName: 'Azure Web App on Container Deploy'
+      inputs:
+        azureSubscription: 'ARM Service Connection'
+        appName: 'as-project1-prod-san-001'
+        imageName: 'acrproject1prodsan001.azurecr.io/project1:latest'
