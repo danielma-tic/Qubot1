@@ -15,8 +15,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 RUN yarn build
-RUN npm run download
-RUN npm run ingest
+#RUN npm run download
+#RUN npm run ingest
 
 
 # Production image, copy all the files and run next
