@@ -3,16 +3,16 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
+- main
 
 resources:
 - repo: self
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '530c7448-33f0-4b4c-b15e-9c9bc36c6c56'
-  imageRepository: 'langchain'
-  containerRegistry: 'crgptprodause001.azurecr.io'
+  dockerRegistryServiceConnection: '6cc6969e-0956-4feb-8e6b-c64820fb2b46'
+  imageRepository: 'project1'
+  containerRegistry: 'acrproject1prodsan001.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
 
@@ -35,10 +35,11 @@ stages:
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
-        tags: 'latest'
+        tags: |
+          $(tag)
     - task: AzureWebAppContainer@1
       displayName: 'Azure Web App on Container Deploy'
       inputs:
         azureSubscription: 'ARM Service Connection'
-        appName: 'app-gpt-prod-ause-001'
-        imageName: 'crgptprodause001.azurecr.io/langchain:latest'
+        appName: 'as-project1-prod-san-001'
+        imageName: 'acrproject1prodsan001.azurecr.io/project1:$(tag)'
