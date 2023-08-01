@@ -5,6 +5,9 @@ import { pinecone } from '@/utils/pinecone-client';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { TextLoader } from 'langchain/document_loaders/fs/text'; // Add the TextLoader class
 import { CSVLoader } from "langchain/document_loaders/fs/csv";
+import { JSONLoader } from "langchain/document_loaders/fs/json";
+import { DocxLoader } from "langchain/document_loaders/fs/docx";
+
 import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
 
@@ -20,6 +23,8 @@ export const run = async () => {
       '.pdf': (path) => new PDFLoader(path),
       '.txt': (path) => new TextLoader(path),
       '.csv': (path) => new CSVLoader(path),
+      '.json': (path) => new JSONLoader(path),
+      '.docx': (path) => new DocxLoader(path),
 
     });
 
